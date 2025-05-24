@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produk - AESTHE</title>
+    <style>
+        /* Font dan Reset CSS */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f8f5f2;
+            color: #333;
+        }
+        
+        /* Header dan Navigasi */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #d4a373;
+        }
+        
+        .cart-icon {
+            position: relative;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #d4a373;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+        
+        /* Page Header */
+        .page-header {
+            background-color: #d4a373;
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+        
+        .breadcrumb li {
+            margin: 0 5px;
+        }
+        
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            color: white;
+        }
+        
+        /* Filter dan Sorting */
+        .filter-section {
+            background-color: white;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .filter-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .filter-group {
+            display: flex;
+            align-items: center;
+        }
+        
+        .filter-label {
+            margin-right: 10px;
+            font-weight: 500;
+        }
+        
+        .filter-select {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: white;
+        }
+        
+        /* Produk Grid */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .product {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .product:hover {
+            transform: translateY(-10px);
+        }
+        
+        .product-img {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .product img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .product:hover img {
+            transform: scale(1.05);
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-name {
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        .product-price {
+            color: #d4a373;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .add-to-cart {
+            width: 100%;
+            background-color: #f8f5f2;
+            border: 1px solid #d4a373;
+            color: #d4a373;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .add-to-cart:hover {
+            background-color: #d4a373;
+            color: white;
+        }
+        
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin: 50px 0;
+        }
+        
+        .pagination a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            margin: 0 5px;
+            border-radius: 5px;
+            background-color: white;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pagination a:hover, .pagination a.active {
+            background-color: #d4a373;
+            color: white;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section {
+            width: 23%;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-section ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section ul li a:hover {
+            color: #d4a373;
+        }
+        
+        .social-links {
+            display: flex;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: #444;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: #d4a373;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #444;
+            color: #ccc;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .products {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .footer-section {
+                width: 48%;
+            }
+            
+            .filter-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .filter-group {
+                margin-bottom: 15px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .products {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .products {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-section {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="nav-container">
+                <a href="index.html" class="logo">AESTHE</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="produk.html">Koleksi</a></li>
+                    <li><a href="#">Tentang</a></li>
+                    <li><a href="#">Kontak</a></li>
+                    <li>
+                        <a href="keranjang.html" class="cart-icon">
+                            Keranjang
+                            <span class="cart-count">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Koleksi Kami</h1>
+            <ul class="breadcrumb">
+                <li><a href="index.html">Beranda</a></li>
+                <li>></li>
+                <li>Koleksi</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="container">
+        <div class="filter-section">
+            <div class="filter-container">
+                <div class="filter-group">
+                    <span class="filter-label">Kategori:</span>
+                    <select class="filter-select">
+                        <option>Semua Kategori</option>
+                        <option>Pakaian Wanita</option>
+                        <option>Pakaian Pria</option>
+                        <option>Aksesoris</option>
+                        <option>Sepatu</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <span class="filter-label">Urutkan:</span>
+                    <select class="filter-select">
+                        <option>Terbaru</option>
+                        <option>Harga: Rendah ke Tinggi</option>
+                        <option>Harga: Tinggi ke Rendah</option>
+                        <option>Popularitas</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="container">
+        <div class="products">
+            <div class="product">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Produk 1">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Blouse Pastel</h3>
+                    <div class="product-price">Rp 299.000</div>
+                    <button class="add-to-cart">Tambah ke Keranjang</button>
+                </div>
+            </div>
+            <div class="product">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1475180098004-ca77a66827be?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Produk 2">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Kemeja Linen</h3>
+                    <div class="product-price">Rp 349.000</div>
+                    <button class="add-to-cart">Tambah ke Keranjang</button>
+                </div>
+            </div>
+            <div class="product">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Produk 3">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Dress Floral</h3>
+                    <div class="product-price">Rp 399.000</div>
+                    <button class="add-to-cart">Tambah ke Keranjang</button>
+                </div>
+            </div>
+            <div class="product">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1550639525-c97d455acf70?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Produk 4">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Sweater Rajut</h3>
+                    <div class="product-price">Rp 279.000</div>
+                    <button class="add-to-cart">Tambah ke Keranjang</button>
+                </div>
+            </div>
+            <div class="product">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Produk 5">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Celana Kulot</h3>
+                    <div class="product-price">Rp 259.000</div>
+                    <button class="add-to-cart">Tambah ke Keranjang</button>
+                </div>
+            </div>
+            <div class="product">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1544441893-675973e31985?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Produk 6">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Jaket Denim</h3>
+                    <div class="product-price">Rp 459.000</div>
+                    <button class="add-to-cart">Tambah ke Keranjang</button>
+                </div>
+            </div>
+            <div class="product">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1582142306909-195724d0a735?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Produk 7">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Rok Midi Plisket</h3>
+                    <div class="product-price">Rp 329.000</div>
+                    <button class="add-to-cart">Tambah ke Keranjang</button>
+                </div>
+            </div>
+            <div class="product">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Produk 8">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Cardigan Oversize</h3>
+                    <div class="product-price">Rp 379.000</div>
+                    <button class="add-to-cart">Tambah ke Keranjang</button>
+                </div>
+            </div>
+            <div class="product">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1551163943-3f7359e92b11?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Produk 9">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Blouse Satin</h3>
+                    <div class="product-price">Rp 289.000</div>
+                    <button class="add-to-cart">Tambah ke Keranjang</button>
+                </div>
+            </div>
+            <div class="product">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1566206091558-7f218b696731?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Produk 10">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Kemeja Motif</h3>
+                    <div class="product-price">Rp 319.000</div>
+                    <button class="add-to-cart">Tambah ke Keranjang</button>
+                </div>
+            </div>
+            <div class="product">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1554568218-0f1715e72254?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Produk 11">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Celana Jeans</h3>
+                    <div class="product-price">Rp 399.000</div>
+                    <button class="add-to-cart">Tambah ke Keranjang</button>
+                </div>
+            </div>
+            <div class="product">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Produk 12">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Tas Selempang</h3>
+                    <div class="product-price">Rp 249.000</div>
+                    <button class="add-to-cart">Tambah ke Keranjang</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <a href="#" class="active">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">></a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>AESTHE</h3>
+                    <p>Toko fashion online dengan koleksi pakaian modern dan estetik untuk pria dan wanita.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Kategori</h3>
+                    <ul>
+                        <li><a href="#">Pakaian Wanita</a></li>
+                        <li><a href="#">Pakaian Pria</a></li>
+                        <li><a href="#">Aksesoris</a></li>
+                        <li><a href="#">Sepatu</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Informasi</h3>
+                    <ul>
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Kontak</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Kebijakan Privasi</a></li>
+                        <li><a href="#">Syarat & Ketentuan</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Hubungi Kami</h3>
+                    <ul>
+                        <li>Email: info@aesthe.com</li>
+                        <li>Telepon: +62 123 4567 890</li>
+                        <li>Alamat: Jl. Fashion No. 123, Jakarta</li>
+                    </ul>
+                    <div class="social-links">
+                        <a href="#">FB</a>
+                        <a href="#">IG</a>
+                        <a href="#">TW</a>
+                        <a href="#">YT</a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 AESTHE. Hak Cipta Dilindungi.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Script sederhana untuk menambahkan fungsionalitas keranjang belanja
+        document.addEventListener('DOMContentLoaded', function() {
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            const cartCount = document.querySelector('.cart-count');
+            let count = 0;
+            
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    count++;
+                    cartCount.textContent = count;
+                    
+                    // Animasi sederhana saat menambahkan ke keranjang
+                    button.textContent = 'Ditambahkan!';
+                    button.style.backgroundColor = '#d4a373';
+                    button.style.color = 'white';
+                    
+                    setTimeout(() => {
+                        button.textContent = 'Tambah ke Keranjang';
+                        button.style.backgroundColor = '';
+                        button.style.color = '';
+                    }, 1000);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
